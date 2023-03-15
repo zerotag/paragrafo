@@ -1,0 +1,162 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmkdhenqfstwm"]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_jgmr1"]
+[ext_resource type="Texture2D" uid="uid://k8bkurxccc4m" path="res://assets/imgs/logo.svg" id="2_ckt8c"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jgmr1")
+
+[node name="P_Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MC_App" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBC_App" type="HBoxContainer" parent="MC_App"]
+layout_mode = 2
+
+[node name="Menu1" type="Panel" parent="MC_App/HBC_App"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="HBC_Menu1" type="VBoxContainer" parent="MC_App/HBC_App/Menu1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MC_LogoContainer" type="MarginContainer" parent="MC_App/HBC_App/Menu1/HBC_Menu1"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ColorRect" type="ColorRect" parent="MC_App/HBC_App/Menu1/HBC_Menu1/MC_LogoContainer"]
+layout_mode = 2
+color = Color(0, 0.501961, 0.756863, 1)
+
+[node name="MC_Logo" type="MarginContainer" parent="MC_App/HBC_App/Menu1/HBC_Menu1/MC_LogoContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TR_Logo" type="TextureRect" parent="MC_App/HBC_App/Menu1/HBC_Menu1/MC_LogoContainer/MC_Logo"]
+layout_mode = 2
+texture = ExtResource("2_ckt8c")
+stretch_mode = 5
+
+[node name="Button1" type="Button" parent="MC_App/HBC_App/Menu1/HBC_Menu1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Botão"
+
+[node name="Button2" type="Button" parent="MC_App/HBC_App/Menu1/HBC_Menu1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Botão"
+
+[node name="Button3" type="Button" parent="MC_App/HBC_App/Menu1/HBC_Menu1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Botão"
+
+[node name="VS_Menu1_Editor" type="VSeparator" parent="MC_App/HBC_App"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="C_Editor" type="Control" parent="MC_App/HBC_App"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBC_Editor" type="HBoxContainer" parent="MC_App/HBC_App/C_Editor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBC_Editor" type="VBoxContainer" parent="MC_App/HBC_App/C_Editor/HBC_Editor"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBC_Editor_Actions" type="HBoxContainer" parent="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor"]
+layout_mode = 2
+
+[node name="B_Bold" type="Button" parent="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor/HBC_Editor_Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "b"
+
+[node name="B_Italic" type="Button" parent="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor/HBC_Editor_Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "i"
+
+[node name="B_Center" type="Button" parent="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor/HBC_Editor_Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "center"
+
+[node name="Editor_Spacer" type="Control" parent="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor/HBC_Editor_Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Editor" type="TextEdit" parent="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+deselect_on_focus_loss_enabled = false
+highlight_all_occurrences = true
+highlight_current_line = true
+draw_control_chars = true
+draw_tabs = true
+draw_spaces = true
+caret_blink = true
+
+[node name="Render" type="RichTextLabel" parent="MC_App/HBC_App/C_Editor/HBC_Editor"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+
+[node name="VS_Editor_Menu2" type="VSeparator" parent="MC_App/HBC_App"]
+layout_mode = 2
+
+[node name="Menu2" type="Panel" parent="MC_App/HBC_App"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[connection signal="pressed" from="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor/HBC_Editor_Actions/B_Bold" to="." method="_on_editor_format_pressed" binds= ["b"]]
+[connection signal="pressed" from="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor/HBC_Editor_Actions/B_Italic" to="." method="_on_editor_format_pressed" binds= ["i"]]
+[connection signal="pressed" from="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor/HBC_Editor_Actions/B_Center" to="." method="_on_editor_format_pressed" binds= ["center"]]
+[connection signal="text_changed" from="MC_App/HBC_App/C_Editor/HBC_Editor/VBC_Editor/Editor" to="." method="_on_editor_text_changed"]
