@@ -1,48 +1,67 @@
 extends Control
 
-@onready var buttons := {
-	"button1": %Button1 as Button,
-	"button2": %Button2 as Button,
-	"button3": %Button3 as Button,
-}
-
-@onready var editor : TextEdit = %Editor;
-@onready var render : RichTextLabel = %Render;
+var phantomjs: Thread;
 
 # Override
 func _ready():
-	pass
+#	test_env();
+#	var handler = HTMLHandler.new();
+#	var bbcode = handler.convert_to_bbcode();
+#	print(bbcode);
+
+	_on_toggle_menu(true, "B_Hide_Menu1", "Menu1")
+	_on_toggle_menu(true, "B_Hide_Menu2", "Menu2")
 
 # Helpers
-func add_bbcode_to_selection(bbcode: String) -> void:
-	var hasSelect = editor.has_selection();
+func test_env() -> void:
+	if (phantomjs == null):
+		phantomjs = Thread.new();
 
-	if (hasSelect):
+	if (phantomjs != null):
+		phantomjs.start(phantomjs_run);
 
-		editor.grab_focus();
-#
-		var selection = {
-			"text": editor.get_selected_text(),
-			"line": {
-				"from": editor.get_selection_from_line(),
-				"to": editor.get_selection_to_line()
-			},
-			"column": {
-				"from": editor.get_selection_from_column(),
-				"to": editor.get_selection_to_column()
-			}
-		};
+func phantomjs_run() -> void:
+	var res: String = to_global("res://");
+	var paths = {
+		"phantomjs": "%s%s/%s" % [res, "bin", "phantomjs.exe"],
+		"config": "%s%s/%s" % [res, "bin", "phantomjs.config.js"],
+		"input": "%s%s/%s" % [res, "dist", "input.html"],
+		"output": "%s%s/%s" % [res, "dist", "output.pdf"]
+	};
 
-		editor.select(selection.line.from, selection.column.from, selection.line.from, selection.line.to);
-		editor.remove_text(selection.line.from, selection.column.from, selection.line.to, selection.column.to);
-		editor.deselect(0);
-		editor.set_caret_line(selection.line.from);
-		editor.set_caret_column(selection.column.from);
-		editor.insert_text_at_caret("[%s]%s[/%s]" % [bbcode, selection.text, bbcode], 0);
+	var args := [
+		'"%s"' % [paths.config],
+		'"%s"' % [paths.input],
+		'"%s"' % [paths.output],
+	];
+
+	var result := OS.execute(paths.phantomjs, args);
+	if result != OK:
+		print("Failed to execute command. [1]");
+	print("[Godot][phantomJS] PDF Generated at <%s>" % [paths.output]);
+
+	result = OS.shell_open(paths.output);
+	if result != OK:
+		print("Failed to execute command. [2]");
+	print("[Godot][Shell] Opened file at <%s>" % [paths.output]);
+
+func to_global(path: String) -> String:
+	return ProjectSettings.globalize_path(path);
+
+func toggle_menu(which: String, state: bool) -> void:
+	which = which;
+	var menu = get_node("%" + which) as Panel;
+	if (!menu):
+		return;
+	menu.visible = state;
+
+func toggle_button(which: String, state: bool) -> void:
+	var myself = get_node("%" + which) as Button;
+	myself.set_pressed_no_signal(state);
+
+	myself.text = "<" if myself.text == ">" else ">";
 
 # Events
-func _on_editor_text_changed() -> void:
-	render.text = editor.text
-
-func _on_editor_format_pressed(bbcode: String) -> void:
-	add_bbcode_to_selection(bbcode);
+func _on_toggle_menu(button_pressed: bool, button_name: String, menu: String) -> void:
+	toggle_button(button_name, button_pressed);
+	toggle_menu(menu, !button_pressed);

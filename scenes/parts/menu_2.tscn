@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dkcgarql5wxl4"]
+
+[node name="Menu2" type="Panel"]
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
