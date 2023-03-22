@@ -1,11 +1,14 @@
-extends Control
+class_name Editor extends Control
 
+# Nodes (Ready)
 @onready var editor : TextEdit = %Editor;
 @onready var render : RichTextLabel = %Render;
+@onready var actions: HBoxContainer = %Editor_Actions;
+@onready var action_spacer: Control = %Editor_Spacer;
 
 # Override
 func _ready():
-	pass
+	add_actions_to_editor();
 
 # Helpers
 func add_bbcode_to_selection(bbcode: String) -> void:
@@ -15,7 +18,7 @@ func add_bbcode_to_selection(bbcode: String) -> void:
 
 		editor.grab_focus();
 
-		var selection = {
+		var selection: Dictionary = {
 			"text": editor.get_selected_text(),
 			"line": {
 				"from": editor.get_selection_from_line(),
@@ -27,12 +30,41 @@ func add_bbcode_to_selection(bbcode: String) -> void:
 			}
 		};
 
+		if (bbcode == "img"):
+			if (!image_exists(selection.text)):
+				return;
+
 		editor.select(selection.line.from, selection.column.from, selection.line.from, selection.line.to);
 		editor.remove_text(selection.line.from, selection.column.from, selection.line.to, selection.column.to);
 		editor.deselect(0);
 		editor.set_caret_line(selection.line.from);
 		editor.set_caret_column(selection.column.from);
 		editor.insert_text_at_caret("[%s]%s[/%s]" % [bbcode, selection.text, bbcode], 0);
+
+func add_actions_to_editor() -> void:
+	for c in actions.get_children():
+		actions.remove_child(c);
+
+	var tags = TagDatabase.TAGS;
+	for t in tags.size():
+		var currTag: Dictionary = tags[t];
+		var btn: Button = Button.new();
+		btn.text = currTag.name;
+		btn.set_h_size_flags(SIZE_EXPAND_FILL);
+		btn.set_stretch_ratio(0.1);
+		btn.connect("pressed",
+			func():
+				_on_editor_format_pressed(currTag.traw);
+		);
+		actions.add_child(btn);
+
+	actions.add_child(action_spacer);
+
+func image_exists(path: String) -> bool:
+	var isRaw = FileAccess.file_exists(path)
+	var isRes = FileAccess.file_exists("res://%s" % [path]);
+	var isUse = FileAccess.file_exists("user://%s" % [path]);
+	return isRaw || isRes || isUse;
 
 # Events
 func _on_editor_text_changed() -> void:

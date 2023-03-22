@@ -1,24 +1,16 @@
-extends Control
+class_name Main extends Control
 
 var phantomjs: Thread;
 
 # Override
 func _ready():
-#	test_env();
-#	var handler = HTMLHandler.new();
-#	var bbcode = handler.convert_to_bbcode();
-#	print(bbcode);
-
-	_on_toggle_menu(true, "B_Hide_Menu1", "Menu1")
-	_on_toggle_menu(true, "B_Hide_Menu2", "Menu2")
+#	_on_toggle_menu(true, "B_Hide_Menu1", "Menu1");
+	_on_toggle_menu(true, "B_Hide_Menu2", "Menu2");
 
 # Helpers
 func test_env() -> void:
-	if (phantomjs == null):
-		phantomjs = Thread.new();
-
-	if (phantomjs != null):
-		phantomjs.start(phantomjs_run);
+	phantomjs = Thread.new();
+	phantomjs.start(phantomjs_run);
 
 func phantomjs_run() -> void:
 	var res: String = to_global("res://");

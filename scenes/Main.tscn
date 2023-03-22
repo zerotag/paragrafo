@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmkdhenqfstwm"]
+[gd_scene load_steps=5 format=3 uid="uid://bihmx1c46nsy1"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_jgmr1"]
-[ext_resource type="PackedScene" uid="uid://bfgxfvq6d8tdv" path="res://scenes/parts/menu_1.tscn" id="2_7bh5r"]
-[ext_resource type="PackedScene" uid="uid://dqgw6vbtt05ay" path="res://scenes/parts/editor.tscn" id="3_lpyto"]
-[ext_resource type="PackedScene" uid="uid://dkcgarql5wxl4" path="res://scenes/parts/menu_2.tscn" id="3_rmqvd"]
+[ext_resource type="PackedScene" uid="uid://bfgxfvq6d8tdv" path="res://scenes/parts/Menu_1.tscn" id="2_7bh5r"]
+[ext_resource type="PackedScene" uid="uid://cu2gahjp4xisc" path="res://scenes/parts/Editor.tscn" id="3_lpyto"]
+[ext_resource type="PackedScene" uid="uid://dkcgarql5wxl4" path="res://scenes/parts/Menu_2.tscn" id="3_rmqvd"]
 
 [node name="App" type="Control"]
 layout_mode = 3
