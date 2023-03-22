@@ -1,13 +1,25 @@
 class_name Editor extends Control
 
 # Nodes (Ready)
+@onready var p_editor: Panel = %P_Editor
 @onready var editor : TextEdit = %Editor;
 @onready var render : RichTextLabel = %Render;
 @onready var actions: HBoxContainer = %Editor_Actions;
 @onready var action_spacer: Control = %Editor_Spacer;
 
+# Nodes (PackedScenes)
+@onready var tooltipScene: PackedScene = preload("res://scenes/parts/Tooltip.tscn");
+
+# Nodes (Not Ready)
+var tooltip: Tooltip;
+
 # Override
 func _ready():
+	if (tooltipScene.can_instantiate()):
+		tooltip = tooltipScene.instantiate() as Tooltip;
+		tooltip.hide();
+		p_editor.add_child(tooltip);
+
 	add_actions_to_editor();
 
 # Helpers
@@ -72,3 +84,16 @@ func _on_editor_text_changed() -> void:
 
 func _on_editor_format_pressed(bbcode: String) -> void:
 	add_bbcode_to_selection(bbcode);
+
+func _on_render_meta_clicked(meta: String) -> void:
+	# NOTE: Should be sanitized before opening
+	OS.shell_open(meta);
+
+func _on_render_meta_hover_started(meta: String) -> void:
+	if (tooltip):
+		tooltip.set_data("", meta, "");
+		tooltip.show();
+
+func _on_render_meta_hover_ended(_meta: String) -> void:
+	if (tooltip):
+		tooltip.hide();
