@@ -15,10 +15,12 @@ var tooltip: Tooltip;
 
 # Override
 func _ready():
+	render.text = '\n[center][url="https://google.com/"]Google[/url][/center]';
+
 	if (tooltipScene.can_instantiate()):
 		tooltip = tooltipScene.instantiate() as Tooltip;
 		tooltip.hide();
-		p_editor.add_child(tooltip);
+		add_child(tooltip);
 
 	add_actions_to_editor();
 
@@ -91,7 +93,7 @@ func _on_render_meta_clicked(meta: String) -> void:
 
 func _on_render_meta_hover_started(meta: String) -> void:
 	if (tooltip):
-		tooltip.set_data("", meta, "");
+		tooltip.set_data("Destino", meta, "");
 		tooltip.show();
 
 func _on_render_meta_hover_ended(_meta: String) -> void:

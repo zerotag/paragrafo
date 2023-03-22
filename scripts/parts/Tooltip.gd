@@ -1,4 +1,4 @@
-class_name Tooltip extends Control
+class_name Tooltip extends PanelContainer
 
 @onready var head_node: Label = %Header
 @onready var body_node: Label = %Body
@@ -9,6 +9,10 @@ class_name Tooltip extends Control
 # Override
 func _ready() -> void:
 	pass
+
+func _physics_process(_delta: float) -> void:
+	var pos = get_viewport().get_mouse_position() + Vector2(10, 10);
+	set_global_position(pos);
 
 # Helper
 func set_data(header: String, body: String, footer: String) -> void:
@@ -35,6 +39,6 @@ func set_data(header: String, body: String, footer: String) -> void:
 		foot_node.show();
 		sep2_node.show();
 
-	queue_redraw();
+	reset_size();
 
 # Event
