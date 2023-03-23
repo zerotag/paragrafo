@@ -39,7 +39,9 @@ layout_mode = 2
 
 [node name="Menu1" parent="MC_App/HBC_App" instance=ExtResource("2_7bh5r")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 0.0
 
 [node name="Gutter_Left" type="VBoxContainer" parent="MC_App/HBC_App"]
 layout_mode = 2

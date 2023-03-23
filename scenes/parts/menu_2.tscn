@@ -3,3 +3,47 @@
 [node name="Menu2" type="Panel"]
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
+
+[node name="VBC_Menu1" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="VBoxContainer" parent="VBC_Menu1"]
+layout_mode = 2
+
+[node name="M_Header" type="MarginContainer" parent="VBC_Menu1/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="VBC_Menu1/MainMenu/M_Header"]
+layout_mode = 2
+text = "Cadastro"
+horizontal_alignment = 1
+
+[node name="MenuItem_1" type="VBoxContainer" parent="VBC_Menu1/MainMenu"]
+layout_mode = 2
+
+[node name="BTN_Toggle" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_1"]
+layout_mode = 2
+text = "Pessoa"
+
+[node name="MenuItem_2" type="VBoxContainer" parent="VBC_Menu1/MainMenu"]
+layout_mode = 2
+
+[node name="BTN_Toggle" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_2"]
+layout_mode = 2
+text = "Processo"
+
+[node name="MenuItem_3" type="VBoxContainer" parent="VBC_Menu1/MainMenu"]
+layout_mode = 2
+
+[node name="BTN_Toggle" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_3"]
+layout_mode = 2
+text = "Documento"
