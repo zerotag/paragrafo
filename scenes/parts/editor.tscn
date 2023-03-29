@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqgw6vbtt05ay"]
+[gd_scene load_steps=3 format=3 uid="uid://cu2gahjp4xisc"]
 
-[ext_resource type="Script" path="res://scripts/parts/editor.gd" id="1_eu8j1"]
+[ext_resource type="Script" path="res://scripts/parts/Editor.gd" id="1_npc8l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcepr"]
+bg_color = Color(1, 1, 0.909804, 1)
 
 [node name="Editor" type="Control"]
 layout_mode = 3
@@ -10,7 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-script = ExtResource("1_eu8j1")
+script = ExtResource("1_npc8l")
 
 [node name="HBC_Editor" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -21,6 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="P_Editor" type="Panel" parent="HBC_Editor"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -36,28 +40,30 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBC_Editor_Actions" type="HBoxContainer" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor"]
+[node name="Editor_Actions" type="HBoxContainer" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="B_Bold" type="Button" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/HBC_Editor_Actions"]
+[node name="B_Bold" type="Button" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/Editor_Actions"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 text = "b"
 
-[node name="B_Italic" type="Button" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/HBC_Editor_Actions"]
+[node name="B_Italic" type="Button" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/Editor_Actions"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 text = "i"
 
-[node name="B_Center" type="Button" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/HBC_Editor_Actions"]
+[node name="B_Center" type="Button" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/Editor_Actions"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 text = "center"
 
-[node name="Editor_Spacer" type="Control" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/HBC_Editor_Actions"]
+[node name="Editor_Spacer" type="Control" parent="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/Editor_Actions"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -67,6 +73,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/background_color = Color(0, 0, 0, 0)
 deselect_on_focus_loss_enabled = false
+wrap_mode = 1
 highlight_all_occurrences = true
 highlight_current_line = true
 draw_control_chars = true
@@ -78,18 +85,31 @@ caret_blink = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Render" type="RichTextLabel" parent="HBC_Editor/P_Render"]
-unique_name_in_owner = true
+[node name="Margin" type="MarginContainer" parent="HBC_Editor/P_Render"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Panel" type="Panel" parent="HBC_Editor/P_Render/Margin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vcepr")
+
+[node name="Render" type="RichTextLabel" parent="HBC_Editor/P_Render/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 
-[connection signal="pressed" from="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/HBC_Editor_Actions/B_Bold" to="." method="_on_editor_format_pressed" binds= ["b"]]
-[connection signal="pressed" from="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/HBC_Editor_Actions/B_Italic" to="." method="_on_editor_format_pressed" binds= ["i"]]
-[connection signal="pressed" from="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/HBC_Editor_Actions/B_Center" to="." method="_on_editor_format_pressed" binds= ["center"]]
+[connection signal="pressed" from="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/Editor_Actions/B_Bold" to="." method="_on_editor_format_pressed" binds= ["b"]]
+[connection signal="pressed" from="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/Editor_Actions/B_Italic" to="." method="_on_editor_format_pressed" binds= ["i"]]
+[connection signal="pressed" from="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/Editor_Actions/B_Center" to="." method="_on_editor_format_pressed" binds= ["center"]]
 [connection signal="text_changed" from="HBC_Editor/P_Editor/MC_Editor/VBC_Editor/Editor" to="." method="_on_editor_text_changed"]
+[connection signal="meta_clicked" from="HBC_Editor/P_Render/Margin/Render" to="." method="_on_render_meta_clicked"]
+[connection signal="meta_hover_ended" from="HBC_Editor/P_Render/Margin/Render" to="." method="_on_render_meta_hover_ended"]
+[connection signal="meta_hover_started" from="HBC_Editor/P_Render/Margin/Render" to="." method="_on_render_meta_hover_started"]

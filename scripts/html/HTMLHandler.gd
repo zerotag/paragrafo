@@ -1,6 +1,6 @@
 class_name HTMLHandler;
 
-var _document: String = '';
+var _document: String;
 
 func read_html_file(path: String) -> void:
 	var file = FileAccess.open(path, FileAccess.READ);
@@ -16,54 +16,38 @@ func render_on_node(_node: Node) -> void:
 	# additional classes and functions.
 	pass
 
-# NOTE: If HTML Rendering doesn't work, get back to this.
-# For now, return empty
 func convert_to_bbcode() -> String:
-	return "";
+	var tag_list: Array[Dictionary] = TagDatabase.TAGS;
 
-	# Define regular expressions for HTML tags that should be converted to BBCode
-	var regex_list := [
-		["<b>", "[b]"],
-		["</b>", "[/b]"],
-		["<i>", "[i]"],
-		["</i>", "[/i]"],
-		["<u>", "[u]"],
-		["</u>", "[/u]"],
-		['<a\\s+[^>]*href="(?<url>[^"]*)".*?>', "[url={url}]"],
-		["</a>", "[/url]"],
-		["<img src=\"([^\"]+)\"[^>]*>", "[img]{url}[/img]"],
-	];
+	var parseRegex = RegEx.new();
+	var converted = _document;
+	for r in tag_list.size():
+		var currTag: Dictionary = tag_list[r];
 
-	# Combine all regular expressions into a single one using the OR operator
-	var combined_regex = "(%s)" % regex_list.reduce(
-		func(acc, piece):
-			return piece[0] if acc == "" else "%s|%s" % [acc, piece[0]];
-	, "");
+		parseRegex.clear();
+		parseRegex.compile(currTag.regx);
 
-	var regex = RegEx.new();
-	regex.compile(combined_regex);
+		var parseTags: Array[RegExMatch] = parseRegex.search_all(_document);
 
-	# Replace all matched HTML tags with their corresponding BBCode
-	var matches = regex.search_all(_document);
-	var bbcode = _document;
-	for i in range(matches.size() -1, -1, -1):
-		var currMatch = matches[i];
-		var tag = currMatch.get_string(0);
-		var url = currMatch.get_string("url");
+		if (parseTags.size() == 0):
+			continue;
 
-		# NOTE: BUG... Wrong index access
-		var replaceWith = regex_list[i][1];
-		bbcode = bbcode.replace(tag, replaceWith);
+		var stag: String = parseTags[0].get_string(0);
+		var etag: String = "";
+		if (parseTags.size() > 1):
+			etag = parseTags[1].get_string(0);
+		var url: String = parseTags[0].get_string("url");
+
+		if (!stag.is_empty()):
+			converted = converted.replace(stag, currTag.sbbt);
+		if (!etag.is_empty()):
+			converted = converted.replace(etag, currTag.ebbt);
+		else:
+			converted = "%s%s" % [converted, currTag.ebbt];
 		if (!url.is_empty()):
-			bbcode = bbcode.replace("{url}", url);
+			converted = converted.replace("{url}", url);
 
-#		for j in range(regex_list.size()):
-#			var regex_piece = regex_list[j];
-#			if tag.match(regex_piece[0]):
-#				bbcode = bbcode.replace(tag, regex_piece[1]);
-#				break;
-
-	return bbcode;
+	return converted;
 
 func sanitize_html() -> void:
 	# Combine all regular expressions into a single one using the OR operator
