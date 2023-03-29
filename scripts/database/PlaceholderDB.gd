@@ -6,6 +6,11 @@ enum StorageType {
 	DOCUMENT,
 }
 
+enum RelationType {
+	PERSON_LITIGATION,
+	LITIGATION_LITIGATION,
+}
+
 enum PersonType {
 	CPF,
 	CNPJ,
@@ -147,13 +152,13 @@ const STORAGE_PLACEHOLDER: Dictionary = {
 };
 
 const RELATION_PLACEHOLDER: Dictionary = {
-	"person_litigation": [
+	RelationType.PERSON_LITIGATION: [
 		[20, 410],
 		[20, 103],
 		[10, 103],
 	],
 
-	"litigation_litigation": [
+	RelationType.LITIGATION_LITIGATION: [
 		[103, 405],
 		[405, 610],
 	],
