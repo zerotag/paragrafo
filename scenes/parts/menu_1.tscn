@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfgxfvq6d8tdv"]
+[gd_scene load_steps=5 format=3 uid="uid://bfgxfvq6d8tdv"]
 
 [ext_resource type="Texture2D" uid="uid://k8bkurxccc4m" path="res://assets/imgs/logo.svg" id="1_252b4"]
 [ext_resource type="Script" path="res://scripts/parts/Menu_Left.gd" id="1_xnans"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_46jma"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jbc73"]
 
@@ -41,6 +43,7 @@ stretch_mode = 5
 
 [node name="BTN_Config" type="Button" parent="VBC_Menu1"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_46jma")
 text = "Configurar"
 
 [node name="MainMenu" type="VBoxContainer" parent="VBC_Menu1"]
@@ -54,6 +57,7 @@ layout_mode = 2
 text = "Endereçamento"
 
 [node name="Submenu" type="PanelContainer" parent="VBC_Menu1/MainMenu/MenuItem_1"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jbc73")
 
@@ -84,3 +88,77 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Autoridade
 Administrativa"
+
+[node name="MenuItem_2" type="VBoxContainer" parent="VBC_Menu1/MainMenu"]
+layout_mode = 2
+
+[node name="BTN_Toggle" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_2"]
+layout_mode = 2
+text = "Requerente"
+
+[node name="MenuItem_3" type="VBoxContainer" parent="VBC_Menu1/MainMenu"]
+layout_mode = 2
+
+[node name="BTN_Toggle" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_3"]
+layout_mode = 2
+text = "Peça Técnica"
+
+[node name="MenuItem_4" type="VBoxContainer" parent="VBC_Menu1/MainMenu"]
+layout_mode = 2
+
+[node name="BTN_Toggle" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_4"]
+layout_mode = 2
+text = "Requerido"
+
+[node name="MenuItem_5" type="VBoxContainer" parent="VBC_Menu1/MainMenu"]
+layout_mode = 2
+
+[node name="BTN_Toggle" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_5"]
+layout_mode = 2
+text = "Causa de Pedir"
+
+[node name="Submenu" type="PanelContainer" parent="VBC_Menu1/MainMenu/MenuItem_5"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jbc73")
+
+[node name="MC" type="MarginContainer" parent="VBC_Menu1/MainMenu/MenuItem_5/Submenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="VBC" type="VBoxContainer" parent="VBC_Menu1/MainMenu/MenuItem_5/Submenu/MC"]
+layout_mode = 2
+
+[node name="sub_1" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_5/Submenu/MC/VBC"]
+layout_mode = 2
+text = "Narrativa Fática"
+
+[node name="sub_2" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_5/Submenu/MC/VBC"]
+layout_mode = 2
+text = "Direito"
+
+[node name="MenuItem_6" type="VBoxContainer" parent="VBC_Menu1/MainMenu"]
+layout_mode = 2
+
+[node name="BTN_Toggle" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_6"]
+layout_mode = 2
+text = "Requerimentos"
+
+[node name="Submenu" type="PanelContainer" parent="VBC_Menu1/MainMenu/MenuItem_6"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jbc73")
+
+[node name="MC" type="MarginContainer" parent="VBC_Menu1/MainMenu/MenuItem_6/Submenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="VBC" type="VBoxContainer" parent="VBC_Menu1/MainMenu/MenuItem_6/Submenu/MC"]
+layout_mode = 2
+
+[node name="sub_1" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_6/Submenu/MC/VBC"]
+layout_mode = 2
+text = "Data e Assinatura"
+
+[node name="sub_2" type="Button" parent="VBC_Menu1/MainMenu/MenuItem_6/Submenu/MC/VBC"]
+layout_mode = 2
+text = "Anexos"
