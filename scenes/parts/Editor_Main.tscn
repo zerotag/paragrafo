@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cu2gahjp4xisc"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/parts/Editor.gd" id="1_npc8l"]
+[ext_resource type="Script" path="res://scripts/parts/Editor_Main.gd" id="1_npc8l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcepr"]
 bg_color = Color(1, 1, 0.909804, 1)

@@ -1,44 +1,6 @@
 class_name PlaceholderDB extends Node
 
-enum StorageType {
-	PERSON,
-	LITIGATION,
-	DOCUMENT,
-}
-
-enum RelationType {
-	PERSON_LITIGATION,
-	LITIGATION_LITIGATION,
-}
-
-enum PersonType {
-	CPF,
-	CNPJ,
-}
-
-enum LitigationSphere {
-	STATE,
-	FEDERAL,
-}
-
-enum LitigationType {
-	CIVIL,
-	CRIMINAL,
-}
-
-enum LitigationLocation {
-	SC,
-	SP,
-	RO,
-}
-
-const INVALID_ITEM: Dictionary = {
-	"name": "Invalid",
-	"code": "",
-	"type": -1,
-	"mail": "",
-};
-
+# Databases
 const STORAGE_PLACEHOLDER: Dictionary = {
 	StorageType.PERSON: {
 		10: {
@@ -163,3 +125,45 @@ const RELATION_PLACEHOLDER: Dictionary = {
 		[405, 610],
 	],
 };
+
+const INVALID_ITEM: Dictionary = {
+	"name": "Not Found",
+	"code": Error.INVALID_ITEM,
+};
+
+# Enumerations
+enum Error {
+	INVALID_ITEM = 404,
+}
+
+enum StorageType {
+	PERSON,
+	LITIGATION,
+	DOCUMENT,
+}
+
+enum RelationType {
+	PERSON_LITIGATION,
+	LITIGATION_LITIGATION,
+}
+
+enum PersonType {
+	CPF,
+	CNPJ,
+}
+
+enum LitigationSphere {
+	STATE,
+	FEDERAL,
+}
+
+enum LitigationType {
+	CIVIL,
+	CRIMINAL,
+}
+
+enum LitigationLocation {
+	SC,
+	SP,
+	RO,
+}

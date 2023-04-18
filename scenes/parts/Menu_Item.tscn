@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgv8i8h7indkr"]
+
+[ext_resource type="Script" path="res://scripts/parts/Menu_Item.gd" id="1_e84lf"]
+[ext_resource type="Script" path="res://scripts/parts/ButtonWithMetadata.gd" id="2_5xb3i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jbc73"]
+
+[node name="MenuItem" type="VBoxContainer"]
+script = ExtResource("1_e84lf")
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<menu_item_label>"
+alignment = 0
+script = ExtResource("2_5xb3i")
+
+[node name="Submenu" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jbc73")
+
+[node name="MC" type="MarginContainer" parent="Submenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="VBC" type="VBoxContainer" parent="Submenu/MC"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Sub_1" type="Button" parent="Submenu/MC/VBC"]
+layout_mode = 2
+text = "<sub_1>"
+alignment = 0
+
+[node name="Sub_2" type="Button" parent="Submenu/MC/VBC"]
+layout_mode = 2
+text = "<sub_2>"
+
+[node name="Sub_3" type="Button" parent="Submenu/MC/VBC"]
+layout_mode = 2
+text = "<sub_3>"

@@ -23,8 +23,13 @@ func _ready():
 		add_child(tooltip);
 
 	add_actions_to_editor();
+	connect_external_events();
 
 # Helpers
+func add_text_to_selection(content: String) -> void:
+	editor.grab_focus();
+	editor.insert_text_at_caret("%s" % [content], 0);
+
 func add_bbcode_to_selection(bbcode: String) -> void:
 	var hasSelect = editor.has_selection();
 
@@ -99,3 +104,9 @@ func _on_render_meta_hover_started(meta: String) -> void:
 func _on_render_meta_hover_ended(_meta: String) -> void:
 	if (tooltip):
 		tooltip.hide();
+
+func connect_external_events() -> void:
+	EventBus.action_editor_insert.connect(
+		func(content: String):
+			add_text_to_selection(content);
+	);
