@@ -11,7 +11,7 @@ extends Panel
 
 var placeholder_menu = {
 	"Endereçamento": {
-		"1ª Instância": "1ª Instância",
+		"1ª Instância": "[center][color=#5555FF]1ª Instância[/color][/center]",
 		"2ª Instância": "2ª Instância",
 		"Instância Superior": "Instância Superior",
 		"Autoridade\nAdministrativa": "Autoridade Administrativa",
@@ -47,10 +47,9 @@ func setup_menu_items() -> void:
 				new_item.button_content = placeholder_menu[item];
 
 			if (placeholder_menu[item] is Dictionary):
-				new_item.type = MenuItem.State.HAS_SUBMENU;
+				new_item.type = MenuItem.Type.HAS_SUBMENU;
 				for subitem in placeholder_menu[item]:
 					new_item.submenu_add_item(subitem, placeholder_menu[item][subitem]);
-					pass
 
 			new_item.finish();
 

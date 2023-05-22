@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgv8i8h7indkr"]
+[gd_scene load_steps=6 format=3 uid="uid://dgv8i8h7indkr"]
 
 [ext_resource type="Script" path="res://scripts/parts/Menu_Item.gd" id="1_e84lf"]
 [ext_resource type="Script" path="res://scripts/parts/ButtonWithMetadata.gd" id="2_5xb3i"]
+[ext_resource type="Texture2D" uid="uid://b6mfcvx48a1mq" path="res://assets/imgs/32/menu.open.png" id="2_ow5dc"]
+[ext_resource type="Texture2D" uid="uid://d121ancko3hm7" path="res://assets/imgs/32/editor.add.text.png" id="4_fogm8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jbc73"]
 
@@ -11,7 +13,9 @@ script = ExtResource("1_e84lf")
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/h_separation = 10
 text = "<menu_item_label>"
+icon = ExtResource("2_ow5dc")
 alignment = 0
 script = ExtResource("2_5xb3i")
 
@@ -30,13 +34,21 @@ layout_mode = 2
 
 [node name="Sub_1" type="Button" parent="Submenu/MC/VBC"]
 layout_mode = 2
+theme_override_constants/h_separation = 10
 text = "<sub_1>"
+icon = ExtResource("4_fogm8")
 alignment = 0
 
 [node name="Sub_2" type="Button" parent="Submenu/MC/VBC"]
 layout_mode = 2
+theme_override_constants/h_separation = 10
 text = "<sub_2>"
+icon = ExtResource("4_fogm8")
+alignment = 0
 
 [node name="Sub_3" type="Button" parent="Submenu/MC/VBC"]
 layout_mode = 2
+theme_override_constants/h_separation = 10
 text = "<sub_3>"
+icon = ExtResource("4_fogm8")
+alignment = 0
