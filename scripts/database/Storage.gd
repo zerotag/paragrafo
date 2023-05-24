@@ -45,21 +45,21 @@ func get_related(source_type: StorageType, related_type: StorageType, relation_t
 		for rel in RELATION[relation_type]:
 
 			# Sanity check if there are only 2 values in this array
-			# And check if RELATION includes the person's ID
+			# And check if RELATION includes the source's ID
 			if (rel.size() == 2 && rel.has(source_id)):
 
 				var FIXED_METHOD = false;
 				if (FIXED_METHOD):
-					# Either assume [0] is person_id and [1] is litigation_id
+					# Either assume [0] is source_id and [1] is related_id
 					# And use it with direct access
 
-					## NOTE: Using this method on LITIGATION_LITIGATION
+					## NOTE: Using this method on relation of type LITIGATION_LITIGATION
 					## Will introduce a bug, which it will return the source item as well
 					var related_item = get_item(related_type, rel[1]);
 					related.append(related_item);
 				else:
-					# Or duplicate the current array, to delete the random positioned person_id
-					# And use the remaining value as litigation_id
+					# Or duplicate the current array, to delete the random positioned source_id
+					# And use the remaining value as related_id
 					var related_item = rel.duplicate();
 					related_item.erase(source_id);
 					related_item = get_item(related_type, rel[0]);
