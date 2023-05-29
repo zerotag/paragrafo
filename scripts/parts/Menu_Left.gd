@@ -1,13 +1,15 @@
 extends Panel
 
-# BTN_Config toggles main menu items to add/remove/edit each button
-# BTN_Config also toggles editting the content of each button
-
-# BTN_Config ENABLE show button to save content after editing.
-# BTN_Config DISABLE each button adds text to the editor on caret position.
+enum State {
+	CONFIG_MODE_ON,
+	CONFIG_MODE_OFF,
+}
 
 @onready var menu_container: VBoxContainer = %MainMenu
+@onready var menu_config: Button = %Config
 @onready var menu_item: PackedScene = preload("res://scenes/parts/Menu_Item.tscn");
+
+var state : State = State.CONFIG_MODE_OFF;
 
 var placeholder_menu = {
 	"Endereçamento": {
@@ -53,4 +55,13 @@ func setup_menu_items() -> void:
 
 			new_item.finish();
 
+func config_mode_on() -> void:
+	state = State.CONFIG_MODE_ON;
+
+func config_mode_off() -> void:
+	state = State.CONFIG_MODE_OFF;
+
 # Event
+func _on_config_toggled(btn_state: bool) -> void:
+	config_mode_off() if btn_state else config_mode_on();
+	EventBus.MENU_LEFT_CONFIG_MODE.emit(state);

@@ -1,3 +1,4 @@
 extends Node
 
-signal action_editor_insert;
+signal ACTION_EDITOR_INSERT();
+signal MENU_LEFT_CONFIG_MODE(state : bool);

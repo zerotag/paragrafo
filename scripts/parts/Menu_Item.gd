@@ -8,6 +8,7 @@ enum Type {
 enum State {
 	SUBMENU_OPENED,
 	SUBMENU_CLOSED,
+	CONFIG_MODE,
 }
 
 @onready var button : ButtonWithMetadata = %Button as ButtonWithMetadata;
@@ -28,6 +29,7 @@ enum State {
 
 var type : Type = Type.PURE_BUTTON;
 var state : State = State.SUBMENU_CLOSED;
+var state_last : State = state;
 var button_text : String = "<menu_item_label>";
 var button_content : String = "<menu_item_content>";
 
@@ -36,6 +38,7 @@ func _ready() -> void:
 	for c in sub_container.get_children():
 		c.queue_free();
 	submenu_close();
+	event_subscribe();
 
 # Helper
 func finish() -> void:
@@ -74,6 +77,8 @@ func submenu_add_item(label_name: String, metadata: String) -> void:
 
 func submenu_toggle() -> void:
 	match state:
+		State.CONFIG_MODE:
+			return;
 		State.SUBMENU_OPENED:
 			submenu_close();
 		State.SUBMENU_CLOSED:
@@ -89,6 +94,13 @@ func submenu_close() -> void:
 	self.button.icon = icons.menu.open;
 	self.submenu.hide();
 
+func event_subscribe() -> void:
+	EventBus.MENU_LEFT_CONFIG_MODE.connect(
+		func(event_state : bool):
+			state_last = state_last if state == State.CONFIG_MODE else state;
+			state = State.CONFIG_MODE if event_state else state_last;
+	);
+
 # Event
 func trigger_editor_event(content: String) -> void:
-	EventBus.action_editor_insert.emit(content);
+	EventBus.ACTION_EDITOR_INSERT.emit(content);

@@ -106,7 +106,7 @@ func _on_render_meta_hover_ended(_meta: String) -> void:
 		tooltip.hide();
 
 func connect_external_events() -> void:
-	EventBus.action_editor_insert.connect(
+	EventBus.ACTION_EDITOR_INSERT.connect(
 		func(content: String):
 			add_text_to_selection(content);
 	);
