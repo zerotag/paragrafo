@@ -38,7 +38,7 @@ func _ready() -> void:
 	for c in sub_container.get_children():
 		c.queue_free();
 	submenu_close();
-	event_subscribe();
+	_event_subscribe();
 
 # Helper
 func finish() -> void:
@@ -50,13 +50,15 @@ func finish() -> void:
 			button.icon = icons.editor.text.add;
 			button.pressed.connect(
 				func():
-					trigger_editor_event(button.content);
+					_handle_button_event(Type.PURE_BUTTON, button.content);
+#					trigger_editor_event(button.content);
 			);
 
 		Type.HAS_SUBMENU:
 			button.pressed.connect(
 				func():
-					submenu_toggle();
+					_handle_button_event(Type.HAS_SUBMENU);
+#					submenu_toggle();
 			)
 
 func submenu_add_item(label_name: String, metadata: String) -> void:
@@ -71,7 +73,8 @@ func submenu_add_item(label_name: String, metadata: String) -> void:
 	new_button.add_theme_constant_override('h_separation', 10);
 	new_button.pressed.connect(
 		func():
-			trigger_editor_event(new_button.content);
+			_handle_button_event(Type.PURE_BUTTON, new_button.content);
+#			trigger_editor_event(new_button.content);
 	);
 	sub_container.add_child(new_button);
 
@@ -94,7 +97,18 @@ func submenu_close() -> void:
 	self.button.icon = icons.menu.open;
 	self.submenu.hide();
 
-func event_subscribe() -> void:
+# Internals
+func _handle_button_event(button_type: Type, content: String = "") -> void:
+	if state == State.CONFIG_MODE:
+		EventBus.MENU_LEFT_CONFIG_BUTTON.emit(self.button);
+	else:
+		match button_type:
+			Type.PURE_BUTTON:
+				trigger_editor_event(content);
+			Type.HAS_SUBMENU:
+				submenu_toggle();
+
+func _event_subscribe() -> void:
 	EventBus.MENU_LEFT_CONFIG_MODE.connect(
 		func(event_state : bool):
 			state_last = state_last if state == State.CONFIG_MODE else state;

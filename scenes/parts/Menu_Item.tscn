@@ -18,6 +18,7 @@ text = "<menu_item_label>"
 icon = ExtResource("2_ow5dc")
 alignment = 0
 script = ExtResource("2_5xb3i")
+content = "<menu_item_content>"
 
 [node name="Submenu" type="PanelContainer" parent="."]
 unique_name_in_owner = true
@@ -38,6 +39,8 @@ theme_override_constants/h_separation = 10
 text = "<sub_1>"
 icon = ExtResource("4_fogm8")
 alignment = 0
+script = ExtResource("2_5xb3i")
+content = "<sub_1_content>"
 
 [node name="Sub_2" type="Button" parent="Submenu/MC/VBC"]
 layout_mode = 2
@@ -45,6 +48,8 @@ theme_override_constants/h_separation = 10
 text = "<sub_2>"
 icon = ExtResource("4_fogm8")
 alignment = 0
+script = ExtResource("2_5xb3i")
+content = "<sub_2_content>"
 
 [node name="Sub_3" type="Button" parent="Submenu/MC/VBC"]
 layout_mode = 2
@@ -52,3 +57,5 @@ theme_override_constants/h_separation = 10
 text = "<sub_3>"
 icon = ExtResource("4_fogm8")
 alignment = 0
+script = ExtResource("2_5xb3i")
+content = "<sub_3_content>"

@@ -1,3 +1,3 @@
 class_name ButtonWithMetadata extends Button
 
-var content: String = "";
+@export_multiline var content: String = "";

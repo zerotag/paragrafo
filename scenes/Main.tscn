@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://csvqtutdtnkre"]
+[gd_scene load_steps=6 format=3 uid="uid://csvqtutdtnkre"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_jgmr1"]
 [ext_resource type="PackedScene" uid="uid://bfgxfvq6d8tdv" path="res://scenes/parts/Menu_Left.tscn" id="2_7bh5r"]
 [ext_resource type="PackedScene" path="res://scenes/parts/Editor_Main.tscn" id="3_lpyto"]
 [ext_resource type="PackedScene" uid="uid://dkcgarql5wxl4" path="res://scenes/parts/Menu_Right.tscn" id="3_rmqvd"]
+[ext_resource type="PackedScene" uid="uid://bat4hqssd2wyl" path="res://scenes/parts/Modal.tscn" id="5_2gyx7"]
 
 [node name="App" type="Control"]
 layout_mode = 3
@@ -77,6 +78,9 @@ theme_override_constants/separation = 20
 [node name="Menu2" parent="MC_App/HBC_App" instance=ExtResource("3_rmqvd")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="Modal" parent="." instance=ExtResource("5_2gyx7")]
+layout_mode = 1
 
 [connection signal="toggled" from="MC_App/HBC_App/Gutter_Left/B_Hide_Menu1" to="." method="_on_toggle_menu" binds= ["B_Hide_Menu1", "Menu1"]]
 [connection signal="toggled" from="MC_App/HBC_App/Gutter_Right/B_Hide_Menu2" to="." method="_on_toggle_menu" binds= ["B_Hide_Menu2", "Menu2"]]

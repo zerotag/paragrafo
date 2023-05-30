@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://bat4hqssd2wyl"]
+
+[ext_resource type="Script" path="res://scenes/parts/Modal.gd" id="1_wggjq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6i464"]
+bg_color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6exyq"]
+bg_color = Color(0.129412, 0.129412, 0.129412, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x2sdm"]
+
+[node name="Modal" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6i464")
+script = ExtResource("1_wggjq")
+
+[node name="Close" type="TextureButton" parent="."]
+layout_mode = 2
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FrameContainer" type="PanelContainer" parent="Center"]
+layout_mode = 2
+
+[node name="Frame" type="Panel" parent="Center/FrameContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6exyq")
+
+[node name="Margin" type="MarginContainer" parent="Center/FrameContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Center/FrameContainer/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FormGrid" type="GridContainer" parent="Center/FrameContainer/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+columns = 2
+
+[node name="Label1" type="Label" parent="Center/FrameContainer/Margin/VBox/FormGrid"]
+layout_mode = 2
+text = "Nome"
+
+[node name="Input1" type="TextEdit" parent="Center/FrameContainer/Margin/VBox/FormGrid"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Footer" type="PanelContainer" parent="Center/FrameContainer/Margin/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_x2sdm")
+
+[node name="Save" type="Button" parent="Center/FrameContainer/Margin/VBox/Footer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Save"
+
+[connection signal="hidden" from="." to="." method="_on_self_hide"]
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
