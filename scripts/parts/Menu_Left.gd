@@ -43,17 +43,13 @@ func setup_menu_items() -> void:
 			var new_item = menu_item.instantiate() as MenuItem;
 			menu_container.add_child(new_item);
 
-			new_item.button_text = item;
-
 			if (placeholder_menu[item] is String):
-				new_item.button_content = placeholder_menu[item];
+				new_item.finish_as_pure(item, placeholder_menu[item]);
 
 			if (placeholder_menu[item] is Dictionary):
-				new_item.type = MenuItem.Type.HAS_SUBMENU;
 				for subitem in placeholder_menu[item]:
 					new_item.submenu_add_item(subitem, placeholder_menu[item][subitem]);
-
-			new_item.finish();
+				new_item.finish_as_submenu(item);
 
 func config_mode_on() -> void:
 	state = State.CONFIG_MODE_ON;

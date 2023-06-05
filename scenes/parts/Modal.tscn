@@ -57,21 +57,33 @@ columns = 2
 
 [node name="Label1" type="Label" parent="Center/FrameContainer/Margin/VBox/FormGrid"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Nome"
+vertical_alignment = 1
 
 [node name="Input1" type="TextEdit" parent="Center/FrameContainer/Margin/VBox/FormGrid"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
+text = "Texto"
+draw_control_chars = true
+draw_tabs = true
+draw_spaces = true
 
 [node name="Footer" type="PanelContainer" parent="Center/FrameContainer/Margin/VBox"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_x2sdm")
 
+[node name="Close" type="Button" parent="Center/FrameContainer/Margin/VBox/Footer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Fechar"
+
 [node name="Save" type="Button" parent="Center/FrameContainer/Margin/VBox/Footer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Save"
+text = "Salvar"
 
 [connection signal="hidden" from="." to="." method="_on_self_hide"]
 [connection signal="pressed" from="Close" to="." method="_on_close_pressed"]

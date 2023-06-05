@@ -20,14 +20,17 @@ func clear_form() -> void:
 	for c in form.get_children():
 		c.queue_free();
 
-func create_group(label_name: String) -> void:
+func create_group(label_name: String, input_content: String, input_type_big: bool = false) -> void:
 	var group = {
 		"label": input_group.label.new() as Label,
 		"input": input_group.input.new() as TextEdit,
 	};
 
 	group.label.text = label_name;
-	group.input.custom_minimum_size = Vector2(200, 0);
+	group.input.text = input_content;
+	group.label.vertical_alignment = VERTICAL_ALIGNMENT_TOP if input_type_big else VERTICAL_ALIGNMENT_CENTER;
+	group.label.size_flags_vertical = Control.SIZE_EXPAND_FILL;
+	group.input.custom_minimum_size = Vector2(400, 200) if input_type_big else Vector2(200, 35);
 	inputs[label_name] = group.input;
 	_add_group_to_form(group);
 
@@ -40,16 +43,11 @@ func _add_group_to_form(group: Dictionary) -> void:
 func _subscribe_to_events() -> void:
 	EventBus.MENU_LEFT_CONFIG_BUTTON.connect(
 		func(button: ButtonWithMetadata):
-			# I get the instance of the button
-			# This is the event being triggered, this need to configure the form
-			# And connect the save button to the saving event
-
-			create_group(button.text);
-			create_group(button.content);
-
+			create_group("Nome", button.text);
+			if (button.TYPE == ButtonWithMetadata.Type.PURE_BUTTON):
+				create_group("Conteúdo", button.content, true);
 			self.show();
 	);
-	pass
 
 # Event
 func _on_close_pressed() -> void:
