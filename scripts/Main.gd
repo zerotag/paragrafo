@@ -1,5 +1,8 @@
 class_name Main extends Control
 
+# WinRAR for compressed files
+#command: "rar a -ep1 -r <destination> <source>"
+
 var phantomjs: Thread;
 
 # Override
