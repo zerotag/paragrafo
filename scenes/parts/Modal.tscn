@@ -87,3 +87,5 @@ text = "Salvar"
 
 [connection signal="hidden" from="." to="." method="_on_self_hide"]
 [connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Center/FrameContainer/Margin/VBox/Footer/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Center/FrameContainer/Margin/VBox/Footer/Save" to="." method="_on_save_pressed"]
