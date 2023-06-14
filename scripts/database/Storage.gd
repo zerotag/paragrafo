@@ -4,30 +4,17 @@ const STORAGE: Dictionary = STORAGE_PLACEHOLDER;
 const RELATION: Dictionary = RELATION_PLACEHOLDER;
 
 # Override
-func _ready() -> void:
-#	# Non Invalid ID
-	print("<Dictionary>");
-	print(get_item(StorageType.PERSON, 20));
-	print(get_item(StorageType.LITIGATION, 405));
-	print(get_item(StorageType.DOCUMENT, 5));
+func _ready(
+	) -> void:
 
-	print("\n%s" % "<Array[Dictionary]>");
-	print(get_litigations_from_person(20));
-	print(get_litigations_from_litigation(405));
-
-#	# Invalid ID
-	print("\n%s" % "<Dictionary>");
-	print(get_item(StorageType.PERSON, 21));
-	print(get_item(StorageType.LITIGATION, 406));
-	print(get_item(StorageType.DOCUMENT, 99));
-
-	print("\n%s" % "<Array[Dictionary]>");
-	print(get_litigations_from_person(21));
-	print(get_documents_from_litigation(406));
-	print(get_litigations_from_litigation(406));
+#	print_tests();
+	pass
 
 # Helper
-func get_item(type: StorageType, id: int) -> Dictionary:
+func get_item(
+	type: StorageType,
+	id: int) -> Dictionary:
+
 	var item = {};
 	if (STORAGE[type].has(id)):
 		item = STORAGE[type][id];
@@ -35,7 +22,11 @@ func get_item(type: StorageType, id: int) -> Dictionary:
 		item = INVALID_ITEM;
 	return item;
 
-func get_related(source_type: StorageType, related_type: StorageType, relation_type: RelationType, source_id: int) -> Array[Dictionary]:
+func get_related(
+	source_type: StorageType,
+	related_type: StorageType,
+	relation_type: RelationType,
+	source_id: int) -> Array[Dictionary]:
 
 	var item = get_item(source_type, source_id);
 	var related: Array[Dictionary] = [];
@@ -70,7 +61,9 @@ func get_related(source_type: StorageType, related_type: StorageType, relation_t
 
 	return related;
 
-func get_documents_from_litigation(litigation_id: int) -> Array[Dictionary]:
+func get_documents_from_litigation(
+	litigation_id: int) -> Array[Dictionary]:
+
 	var litigation = get_item(StorageType.LITIGATION, litigation_id);
 	var documents: Array[Dictionary] = [];
 
@@ -87,17 +80,52 @@ func get_documents_from_litigation(litigation_id: int) -> Array[Dictionary]:
 	return documents;
 
 # Aliases
-func get_person(person_id: int) -> Dictionary:
+func get_person(
+	person_id: int) -> Dictionary:
+
 	return get_item(StorageType.PERSON, person_id);
 
-func get_litigation(litigation_id: int) -> Dictionary:
+func get_litigation(
+	litigation_id: int) -> Dictionary:
+
 	return get_item(StorageType.LITIGATION, litigation_id);
 
-func get_document(document_id: int) -> Dictionary:
+func get_document(
+	document_id: int) -> Dictionary:
+
 	return get_item(StorageType.DOCUMENT, document_id);
 
-func get_litigations_from_person(person_id: int) -> Array[Dictionary]:
+func get_litigations_from_person(
+	person_id: int) -> Array[Dictionary]:
+
 	return get_related(StorageType.PERSON, StorageType.LITIGATION, RelationType.PERSON_LITIGATION, person_id);
 
-func get_litigations_from_litigation(litigation_id: int) -> Array[Dictionary]:
+func get_litigations_from_litigation(
+	litigation_id: int) -> Array[Dictionary]:
+
 	return get_related(StorageType.LITIGATION, StorageType.LITIGATION, RelationType.LITIGATION_LITIGATION, litigation_id);
+
+# DEBUG
+func print_tests(
+	) -> void:
+
+	# Non Invalid ID
+	print("<Dictionary>");
+	print(get_item(StorageType.PERSON, 20));
+	print(get_item(StorageType.LITIGATION, 405));
+	print(get_item(StorageType.DOCUMENT, 5));
+
+	print("\n%s" % "<Array[Dictionary]>");
+	print(get_litigations_from_person(20));
+	print(get_litigations_from_litigation(405));
+
+	# Invalid ID
+	print("\n%s" % "<Dictionary>");
+	print(get_item(StorageType.PERSON, 21));
+	print(get_item(StorageType.LITIGATION, 406));
+	print(get_item(StorageType.DOCUMENT, 99));
+
+	print("\n%s" % "<Array[Dictionary]>");
+	print(get_litigations_from_person(21));
+	print(get_documents_from_litigation(406));
+	print(get_litigations_from_litigation(406));

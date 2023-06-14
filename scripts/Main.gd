@@ -9,6 +9,7 @@ var phantomjs: Thread;
 func _ready():
 #	_on_toggle_menu(true, "B_Hide_Menu1", "Menu1");
 	_on_toggle_menu(true, "B_Hide_Menu2", "Menu2");
+#	_test_database();
 
 # Helpers
 func test_env() -> void:
@@ -60,3 +61,21 @@ func toggle_button(which: String, state: bool) -> void:
 func _on_toggle_menu(button_pressed: bool, button_name: String, menu: String) -> void:
 	toggle_button(button_name, button_pressed);
 	toggle_menu(menu, !button_pressed);
+
+# DEBUG
+func _test_database() -> void:
+	var sect = "v.000.001.alpha";
+	var fileID = 10;
+	var data = {
+		"id": fileID,
+		"nome": "João",
+		"numero": "XXX.XXX.XXX-XX",
+		"tipo": "cpf",
+		"email": "meu@dominio.com",
+	};
+
+	var batch = [];
+	for k in data:
+		batch.append(ConfigFileStructure.new(sect, k, data[k]));
+
+	Database.insert_update_batch("person", fileID, batch);
